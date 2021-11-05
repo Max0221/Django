@@ -14,20 +14,26 @@
         <h1>Iniciar sesion</h1>
       </ion-card-title>
       <ion-card-content>
+        <form [formGroup]="LoginForm">
         <ion-item>
           <ion-label position="stacked">Nombre de usuario</ion-label>
-          <ion-input type="text" [(ngModel)]="dato"></ion-input>
+          <ion-input type="text" formControlName = "name" [(ngModel)]="valuefromuser"></ion-input>
         </ion-item>
+        <div *ngIf="LoginForm.get('name').hasError('required') &&
+        LoginForm.get('name').touched ">Ingrese un Nombre</div>
         <br>
         <ion-item>
           <ion-label position="stacked">Contraseña</ion-label>
-          <ion-input type= "password"></ion-input>
+          <ion-input type= "password" formControlName = "contra" [(ngModel)]="valuefrompass"></ion-input>
         </ion-item>
+        <div *ngIf="LoginForm.get('contra').hasError('required') &&
+        LoginForm.get('contra').touched ">Ingrese una contraseña</div>
       <br>
-      <ion-button color="warning" (click)="saludar()" [routerLink]="['/inicioo']">
+      <ion-button type= "submit" [disabled]="LoginForm.invalid"  color="warning"  (click)="saludar()" [routerLink]="['/inicioo']">
         Ingresar
       </ion-button>
-      </ion-card-content>
+    </form> 
+  </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
